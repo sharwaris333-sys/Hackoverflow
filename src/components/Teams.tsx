@@ -15,6 +15,18 @@ interface TeamMember {
 }
 
 export default function Team() {
+  const principle: TeamMember[] = [
+    {
+      name: "Dr. Jagdish W. Bakal",
+      role: "Principal",
+      image: "/images/Team/Jagdish W. Bakal.jpeg",
+      bio: " Principal of MES's Pillai College of Engineering, providing visionary leadership and unwavering support to Hackoverflow.",
+      socials: {
+        linkedin: "https://www.linkedin.com/in/jagdish-bakal-0508/",
+        email: "jagdishbakal@mes.ac.in"
+      },
+    },
+  ]
   const facultyCoordinator: TeamMember[] = [
     {
       name: "Prof. Rutvij Mane",
@@ -189,6 +201,16 @@ export default function Team() {
         github: "http://github.com/AayushGunjal"
       },
     },
+    {
+      name: "Prof. Rutvij Mane",
+      role: "Faculty Coordinator",
+      image: "/images/Team/Rutvij Mane.jpeg",
+      bio: "Academic mentor and technical advisor",
+      socials: {
+        linkedin: " https://www.linkedin.com/in/rutvij-mahendra-mane-0500621b0?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+        email: "rutvijmane@mes.ac.in"
+      },
+    },
   ];
 
   const TeamCard = ({ member }: { member: TeamMember }) => (
@@ -276,7 +298,13 @@ export default function Team() {
           justify-content: center;
           gap: 2rem;
         }
-
+        
+        .principle-grid {
+          display: grid;
+          grid-template-columns: 260px;
+          justify-content: center;
+        }
+        
         .leads-grid {
           display: grid;
           grid-template-columns: repeat(2, 260px);
@@ -379,6 +407,7 @@ export default function Team() {
         }
 
         @media (max-width: 768px) {
+          .principle-grid
           .faculty-grid,
           .leads-grid,
           .heads-grid {
@@ -395,6 +424,18 @@ export default function Team() {
           subtitle="Innovators, dreamers, and builders creating the future"
           className="team-header-spacer"
         />
+        {/* PRINCIPAL */}
+        <div className="team-level">
+          <div className="section-head">
+            <div className="section-title">Principal</div>
+            <div className="section-divider" />
+          </div>
+          <div className="principle-grid">
+            {principle.map((m, i) => (
+              <TeamCard key={i} member={m} />
+            ))}
+          </div>
+        </div>
 
         {/* FACULTY */}
         <div className="team-level">
