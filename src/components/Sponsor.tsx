@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import SectionHeader from "@/components/SectionHeader"; // Import SectionHeader
 
-// --- Interfaces ---
 interface SponsorItem {
   id: number;
   name?: string;
@@ -19,9 +19,8 @@ const SponsorUs: React.FC = () => {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [hoveredBenefit, setHoveredBenefit] = useState<number | null>(null);
 
-  // --- DATA ---
   const ourSponsors: SponsorItem[] = [
-    { id: 1, name: "aecc_global", image: "/images/Sponsors/aecc_global.png", link: "#", effect: "fade-up", SubSponsorcategory: "Co-Powered By" },
+    { id: 1, name: "aecc_global", image: "/images/Sponsors/aecc_global.png", link: "#", effect: "fade-up", SubSponsorcategory: "Gold Sponsor" },
     { id: 2, name: "osen", image: "/images/Sponsors/osen.png", link: "#", effect: "fade-up", SubSponsorcategory: "Gold Sponsor" },
     { id: 3, name: "imperial", image: "/images/Sponsors/imperial.png", link: "#", effect: "fade-up", SubSponsorcategory: "Gold Sponsor" },
     { id: 4, name: "IMFS", image: "/images/Sponsors/imfsWhite.png", link: "#", effect: "fade-up", SubSponsorcategory: "Gold Sponsor" },
@@ -70,7 +69,7 @@ const SponsorUs: React.FC = () => {
   }, []);
 
   return (
-    <section className="sponsor-main-section">
+    <>
       <style>{`
         /* --- GLOBAL & RESET --- */
         html, body { overflow-x: hidden; }
@@ -234,7 +233,14 @@ const SponsorUs: React.FC = () => {
         .benefit-icon { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
         .benefit-title { color: #fff; font-weight: 700; margin-bottom: 0.8rem; font-size: 1.2rem; }
         .benefit-desc { color: #B0B0B0; font-size: 0.95rem; line-height: 1.5; }
-
+        
+        .stat-icon {
+          font-size: 2rem;
+          display: block;
+          margin-bottom: 1rem;
+          transform: scale(1.5);
+        }
+        
         /* --- SPONSOR SECTION HEADER --- */
         .simple-header {
           text-align: center;
@@ -255,18 +261,16 @@ const SponsorUs: React.FC = () => {
           border-radius: 2px;
         }
 
-        /* --- OUR SPONSORS (LARGE & CENTERED) --- */
         .our-sponsors-grid {
           display: flex;
           justify-content: center;
           flex-wrap: wrap;
-          gap: 60px; /* Increased gap for cleaner look */
+          gap: 60px;
           width: 100%;
           padding: 0 1rem;
         }
 
         .our-sponsor-card {
-          /* Increased width for bigger logos */
           width: 300px; 
           display: flex;
           flex-direction: column;
@@ -291,7 +295,6 @@ const SponsorUs: React.FC = () => {
         /* --- LOGO WRAPPER (BIGGER) --- */
         .sponsor-logo-wrapper {
           width: 100%;
-          /* Increased height for visual impact */
           height: 180px; 
           display: flex;
           align-items: center;
@@ -364,18 +367,6 @@ const SponsorUs: React.FC = () => {
           animation-play-state: paused;
         }
 
-        /* --- CONTACT --- */
-        .contact-section {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 20px;
-          padding: 4rem;
-          text-align: center;
-          margin-top: 8rem;
-        }
-        .contact-title { font-size: 2rem; font-weight: 800; color: white; margin-bottom: 1rem; }
-        .contact-desc { color: #B0B0B0; margin-bottom: 2rem; }
-
         /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
           .benefits-grid { grid-template-columns: repeat(2, 1fr); }
@@ -393,111 +384,101 @@ const SponsorUs: React.FC = () => {
         }
       `}</style>
 
-      {/* Orbs */}
-      <div className="orb-glow orb-1" style={{ transform: `translate(${cursorPos.x * 0.02}px, ${cursorPos.y * 0.02}px)` }} />
-      <div className="orb-glow orb-2" style={{ transform: `translate(${-cursorPos.x * 0.02}px, ${-cursorPos.y * 0.02}px)` }} />
+      <section className="sponsor-main-section">
+        <div className="orb-glow orb-1" style={{ transform: `translate(${cursorPos.x * 0.02}px, ${cursorPos.y * 0.02}px)` }} />
+        <div className="orb-glow orb-2" style={{ transform: `translate(${-cursorPos.x * 0.02}px, ${-cursorPos.y * 0.02}px)` }} />
 
-      <div className="sponsor-container">
-        
-        {/* HERO */}
-        <div className="hero-section">
-          <span className="faq-badge">Partnership Opportunity</span>
-          <h1 className="hero-title">
-            Want to <span className="gradient-text">Sponsor Us?</span>
-          </h1>
-          <p className="hero-subtitle">
-            Reach hundreds of students and innovators by partnering with HackOverflow 4.0.
-          </p>
-          <div className="cta-buttons">
-            <a className="cta-btn cta-primary" href="/docs/SponsorBrochure.pdf" download>
-              Download Brochure
-            </a>
-            <a className="cta-btn cta-secondary" href="mailto:hackoverflow@mes.ac.in">
-              Email Us
-            </a>
+        <div className="sponsor-container">
+
+          {/* HERO */}
+          <div className="hero-section">
+            <SectionHeader
+              badge="Partnership Opportunity"
+              title="Want to"
+              gradientText="Sponsor Us?"
+              subtitle="Reach hundreds of students and innovators by partnering with HackOverflow 4.0."
+            />
+
+            <div className="cta-buttons">
+              <a className="cta-btn cta-primary" href="/docs/SponsorBrochure.pdf" download>
+                Download Brochure
+              </a>
+              <a className="cta-btn cta-secondary" href="mailto:hackoverflow@mes.ac.in">
+                Email Us
+              </a>
+            </div>
           </div>
-        </div>
 
-        {/* STATS */}
-        <div className="stats-grid">
-          {stats.map((stat, index) => (
-            <div key={index} className="stat-card">
-              <div className="stat-icon">{stat.icon}</div>
-              <span className="stat-number">{stat.number}</span>
-              <span className="stat-label">{stat.label}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* BENEFITS */}
-        <h2 className="section-title">
-          Why <span className="gradient-text">Partner With Us?</span>
-        </h2>
-        <div className="benefits-grid">
-          {benefits.map((b) => (
-            <div
-              key={b.id}
-              className="benefit-card"
-              style={{ borderColor: hoveredBenefit === b.id ? b.color : undefined }}
-              onMouseEnter={() => setHoveredBenefit(b.id)}
-              onMouseLeave={() => setHoveredBenefit(null)}
-            >
-              <span className="benefit-icon">{b.icon}</span>
-              <h3 className="benefit-title">{b.title}</h3>
-              <p className="benefit-desc">{b.desc}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* OUR SPONSORS (CLEAN LAYOUT - NO BOXES, BIG LOGOS) */}
-        <h2 className="simple-header">Our Sponsors</h2>
-        <div className="our-sponsors-grid">
-          {ourSponsors.map((s) => (
-            <div key={s.id} className="our-sponsor-card" data-aos={s.effect}>
-              <div className="sponsor-role-label">{s.SubSponsorcategory}</div>
-              <div className="sponsor-logo-wrapper">
-                <Image 
-                  src={s.image} 
-                  alt={s.name || "Sponsor"}
-                  fill
-                  style={{ objectFit: 'contain' }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* PAST SPONSORS (MARQUEE - LARGE & VISIBLE) */}
-        <h2 className="simple-header">Past Sponsors</h2>
-        <div className="marquee-container">
-          <div className="marquee-track">
-            {/* Duplicated list for seamless scrolling */}
-            {[...pastSponsors, ...pastSponsors].map((s, i) => (
-              <div key={i} className="marquee-item">
-                <a href={s.link} target="_blank" rel="noopener noreferrer" style={{ display: 'block', width: '100%', height: '100%', position: 'relative' }}>
-                  <Image 
-                    src={s.image} 
-                    alt="Past Sponsor"
-                    fill
-                    style={{ objectFit: 'contain' }}
-                  />
-                </a>
+          {/* STATS */}
+          <div className="stats-grid">
+            {stats.map((stat, index) => (
+              <div key={index} className="stat-card">
+                <div className="stat-icon">{stat.icon}</div>
+                <span className="stat-number">{stat.number}</span>
+                <span className="stat-label">{stat.label}</span>
               </div>
             ))}
           </div>
-        </div>
 
-        {/* CONTACT */}
-        <div className="contact-section">
-          <h2 className="contact-title">Ready to Make an Impact?</h2>
-          <p className="contact-desc">Let's discuss how we can create a meaningful partnership.</p>
-          <div className="cta-buttons">
-            <a className="cta-btn cta-primary" href="mailto:hackoverflow@mes.ac.in">Get in Touch</a>
+          {/* BENEFITS */}
+          <h2 className="section-title">
+            Why <span className="gradient-text">Partner With Us?</span>
+          </h2>
+          <div className="benefits-grid">
+            {benefits.map((b) => (
+              <div
+                key={b.id}
+                className="benefit-card"
+                style={{ borderColor: hoveredBenefit === b.id ? b.color : undefined }}
+                onMouseEnter={() => setHoveredBenefit(b.id)}
+                onMouseLeave={() => setHoveredBenefit(null)}
+              >
+                <span className="benefit-icon">{b.icon}</span>
+                <h3 className="benefit-title">{b.title}</h3>
+                <p className="benefit-desc">{b.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* OUR SPONSORS */}
+          <h2 className="simple-header">Our Sponsors</h2>
+          <div className="our-sponsors-grid">
+            {ourSponsors.map((s) => (
+              <div key={s.id} className="our-sponsor-card" data-aos={s.effect}>
+                <div className="sponsor-role-label">{s.SubSponsorcategory}</div>
+                <div className="sponsor-logo-wrapper">
+                  <Image
+                    src={s.image}
+                    alt={s.name || "Sponsor"}
+                    fill
+                    style={{ objectFit: 'contain' }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* PAST SPONSORS (MARQUEE - LARGE & VISIBLE) */}
+          <h2 className="simple-header">Past Sponsors</h2>
+          <div className="marquee-container">
+            <div className="marquee-track">
+              {[...pastSponsors, ...pastSponsors].map((s, i) => (
+                <div key={i} className="marquee-item">
+                  <a href={s.link} target="_blank" rel="noopener noreferrer" style={{ display: 'block', width: '100%', height: '100%', position: 'relative' }}>
+                    <Image
+                      src={s.image}
+                      alt="Past Sponsor"
+                      fill
+                      style={{ objectFit: 'contain' }}
+                    />
+                  </a>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
